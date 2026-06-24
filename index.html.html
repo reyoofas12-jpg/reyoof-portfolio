@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ريوف سحبان — محللة بيانات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E1116; --bg-e:#161B24; --bg-card:#131822;
+  --b:#232938; --bb:#2D3548;
+  --t1:#EDEFF4; --t2:#9AA3B5; --t3:#5C6478;
+  --blue:#4C8DD9; --blue-dim:#1a3558;
+  --gold:#D4A857; --green:#4CAF82;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'IBM Plex Sans Arabic',sans-serif;
+  --r:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--t1);font-family:var(--sans);line-height:1.7;overflow-x:hidden;}
+.bg-lines{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--b) 1px,transparent 1px),linear-gradient(90deg,var(--b) 1px,transparent 1px);
+  background-size:64px 64px;opacity:0.28;
+  mask-image:radial-gradient(ellipse 80% 50% at 50% 0%,black 20%,transparent 75%);}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+
+/* NAV */
+nav{position:fixed;top:0;right:0;left:0;z-index:100;background:rgba(14,17,22,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--b);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{font-family:var(--mono);font-size:14px;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--t2);text-decoration:none;font-size:14px;transition:color .2s;}
+.nav-links a:hover{color:var(--t1);}
+.nav-cta{background:var(--blue);color:#fff;padding:8px 18px;border-radius:6px;font-size:13px;text-decoration:none;font-weight:500;transition:background .2s;}
+.nav-cta:hover{background:#5B9AE0;}
+@media(max-width:680px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{position:relative;z-index:2;padding:148px 0 88px;border-bottom:1px solid var(--b);}
+.eyebrow{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.08em;margin-bottom:22px;display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);}
+.hero h1{font-size:clamp(30px,5vw,54px);font-weight:600;line-height:1.22;margin-bottom:20px;max-width:700px;}
+.hero h1 span{color:var(--blue);}
+.hero-desc{font-size:16px;color:var(--t2);max-width:560px;margin-bottom:36px;}
+.hero-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;padding:13px 26px;border-radius:7px;text-decoration:none;font-size:14px;font-weight:500;transition:all .2s;margin-bottom:60px;}
+.hero-btn:hover{background:#5B9AE0;transform:translateY(-1px);}
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.stat-cell{background:var(--bg-card);padding:20px 18px;}
+.stat-num{font-family:var(--mono);font-size:24px;font-weight:600;margin-bottom:4px;}
+.stat-num span{color:var(--blue);}
+.stat-label{font-size:12px;color:var(--t3);}
+@media(max-width:620px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+
+/* SKILLS */
+.skills-sec{position:relative;z-index:2;padding:80px 0;border-bottom:1px solid var(--b);}
+.sec-tag{font-family:var(--mono);font-size:12px;color:var(--blue);letter-spacing:.06em;margin-bottom:14px;}
+.sec-h{font-size:clamp(22px,2.8vw,32px);font-weight:600;margin-bottom:44px;}
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.tool-card{background:var(--bg-card);border:1px solid var(--b);border-radius:var(--r);padding:24px 18px;text-align:center;transition:border-color .25s;}
+.tool-card:hover{border-color:var(--bb);}
+.tool-logo{width:48px;height:48px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;}
+.tool-logo svg{width:100%;height:100%;}
+.tool-name{font-size:14px;font-weight:500;margin-bottom:4px;}
+.tool-desc{font-size:12px;color:var(--t3);}
+@media(max-width:680px){.tools-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ABOUT */
+.about-sec{position:relative;z-index:2;padding:80px 0;border-bottom:1px solid var(--b);}
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:start;}
+.about-text p{color:var(--t2);font-size:15px;margin-bottom:16px;}
+.about-text strong{color:var(--t1);}
+@media(max-width:720px){.about-grid{grid-template-columns:1fr;gap:32px;}}
+
+/* PROJECTS */
+.projects-sec{position:relative;z-index:2;padding:80px 0;}
+.project-card{background:var(--bg-card);border:1px solid var(--b);border-radius:var(--r);margin-bottom:20px;overflow:hidden;transition:border-color .25s;}
+.project-card:hover{border-color:var(--bb);}
+.ba-wrap{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--b);}
+.ba-side{position:relative;overflow:hidden;background:var(--bg-e);min-height:160px;display:flex;align-items:center;justify-content:center;}
+.ba-side:first-child{border-left:1px solid var(--b);}
+.ba-tag{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;}
+.ba-tag.before{background:rgba(217,104,76,.9);color:#fff;}
+.ba-tag.after{background:rgba(76,175,130,.9);color:#fff;}
+.ba-placeholder{font-family:var(--mono);font-size:11px;color:var(--t3);text-align:center;padding:32px 20px;line-height:1.9;}
+.proj-body{padding:26px 28px 0;}
+.proj-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.proj-num{font-family:var(--mono);font-size:12px;color:var(--gold);}
+.chip{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:4px;background:var(--bg-e);color:var(--t2);border:1px solid var(--b);}
+.proj-body h3{font-size:19px;font-weight:600;margin-bottom:10px;}
+.proj-body .desc{color:var(--t2);font-size:14px;max-width:700px;margin-bottom:14px;line-height:1.8;}
+.hl{list-style:none;margin-bottom:16px;}
+.hl li{color:var(--t2);font-size:13.5px;padding-right:16px;position:relative;margin-bottom:7px;}
+.hl li::before{content:'';position:absolute;right:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--blue);}
+.result{display:flex;align-items:flex-start;gap:8px;background:var(--bg-e);border-radius:7px;padding:10px 14px;margin-bottom:20px;border-right:3px solid var(--green);}
+.result-l{font-size:12px;color:var(--t3);white-space:nowrap;margin-top:1px;}
+.result-v{font-family:var(--mono);font-size:12.5px;color:var(--green);}
+.proj-links{display:flex;gap:8px;flex-wrap:wrap;padding:16px 28px;border-top:1px solid var(--b);}
+.dl-btn{font-size:13px;color:var(--blue);text-decoration:none;padding:7px 16px;border:1px solid var(--blue);border-radius:6px;transition:all .2s;display:inline-flex;align-items:center;gap:6px;background:var(--blue-dim);}
+.dl-btn:hover{background:var(--blue);color:#fff;}
+
+/* CONTACT */
+.contact-sec{text-align:center;padding:100px 0 110px;}
+.contact-sec h2{font-size:clamp(24px,3.5vw,40px);font-weight:600;margin-bottom:14px;}
+.contact-sec p{color:var(--t2);font-size:15px;max-width:420px;margin:0 auto 34px;}
+.contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+
+footer{border-top:1px solid var(--b);padding:26px 0;}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+footer p{color:var(--t3);font-size:13px;}
+</style>
+</head>
+<body>
+<div class="bg-lines"></div>
+
+<nav>
+  <div class="wrap nav-inner">
+    <div class="logo"><span class="logo-dot"></span>ريوف سحبان</div>
+    <ul class="nav-links">
+      <li><a href="#skills">المهارات</a></li>
+      <li><a href="#about">نبذة</a></li>
+      <li><a href="#projects">المشاريع</a></li>
+      <li><a href="#contact">تواصل</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">تواصلي معي</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">DATA ANALYST</div>
+    <h1>البيانات فوضى —<br>أنا أحوّلها إلى <span>قرارات</span></h1>
+    <p class="hero-desc">
+      محللة بيانات أبني حلولاً تحليلية متكاملة من الصفر:<br>
+      تنظيف البيانات، أتمتة التقارير، وداشبوردات تفاعلية باستخدام Python وSQL وExcel وPower BI.
+    </p>
+    <a href="#projects" class="hero-btn">شاهدي مشاريعي ↓</a>
+    <div class="stat-strip">
+      <div class="stat-cell">
+        <div class="stat-num"><span>+10</span></div>
+        <div class="stat-label">مشاريع مكتملة</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num"><span>+14K</span></div>
+        <div class="stat-label">صف بيانات محلّل</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num"><span>+10</span></div>
+        <div class="stat-label">ملف Excel موحّد</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num"><span>4</span></div>
+        <div class="stat-label">أداة تحليل متقنة</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SKILLS -->
+<section class="skills-sec" id="skills">
+  <div class="wrap">
+    <div class="sec-tag">// المهارات</div>
+    <div class="sec-h">الأدوات التي أستخدمها</div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-logo">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="8" fill="#217346"/>
+            <text x="24" y="34" text-anchor="middle" font-size="26" font-weight="bold" fill="#fff" font-family="Arial">X</text>
+          </svg>
+        </div>
+        <div class="tool-name">Microsoft Excel</div>
+        <div class="tool-desc">تجميع · تنظيف · نمذجة بيانات</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-logo">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="8" fill="#F2C811"/>
+            <text x="24" y="32" text-anchor="middle" font-size="13" font-weight="bold" fill="#000" font-family="Arial">Power</text>
+            <text x="24" y="44" text-anchor="middle" font-size="11" font-weight="bold" fill="#000" font-family="Arial">BI</text>
+          </svg>
+        </div>
+        <div class="tool-name">Power BI</div>
+        <div class="tool-desc">داشبوردات · تقارير · DAX</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-logo">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="8" fill="#3776AB"/>
+            <text x="24" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#FFD43B" font-family="Arial">Py</text>
+            <circle cx="24" cy="38" r="3" fill="#FFD43B"/>
+          </svg>
+        </div>
+        <div class="tool-name">Python</div>
+        <div class="tool-desc">Pandas · openpyxl · أتمتة</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-logo">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="48" rx="8" fill="#336791"/>
+            <text x="24" y="34" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff" font-family="Arial">SQL</text>
+          </svg>
+        </div>
+        <div class="tool-name">SQL</div>
+        <div class="tool-desc">SQLite · PostgreSQL · تحليل</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+  <div class="wrap">
+    <div class="sec-tag">// نبذة</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="sec-h" style="margin-bottom:20px">من أنا</div>
+        <p>محللة بيانات أؤمن أن قيمة العمل التحليلي الحقيقية ليست في الأدوات، بل في القدرة على <strong>فهم المشكلة أولاً</strong> — ثم الوصول إلى إجابة واضحة وقابلة للتنفيذ.</p>
+        <p>في كل مشروع أبدأ بتشريح البيانات وفهم جودتها وسياقها قبل أي خطوة تحليلية، وأنتهي بمخرج يخدم صانع القرار مباشرة — لأن <strong>البيانات بدون قرار مجرد أرقام</strong>.</p>
+        <p>عملت على مشاريع حقيقية تشمل الموارد البشرية، المطالبات المالية، والبيانات الجيو-تراثية، وطوّرت خلالها قدرة عالية على <strong>تحويل الفوضى إلى نظام</strong>.</p>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--b);border-radius:var(--r);padding:24px;">
+        <div style="font-family:var(--mono);font-size:12px;color:var(--t3);margin-bottom:16px;">// التخصصات</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">📊 تنظيف وتحضير البيانات الخام</div>
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">⚙️ أتمتة التقارير بـ Python</div>
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">🗄️ بناء قواعد البيانات وتحليلها بـ SQL</div>
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">📈 داشبوردات تفاعلية بـ Power BI</div>
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">🔗 دمج وتوحيد مصادر بيانات متعددة</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-sec" id="projects">
+  <div class="wrap">
+    <div class="sec-tag">// المشاريع</div>
+    <div class="sec-h">مشاريع حقيقية، نتائج قابلة للقياس</div>
+
+    <!-- 01 -->
+    <article class="project-card">
+      <div class="ba-wrap">
+        <div class="ba-side">
+          <div class="ba-placeholder">بيانات مصادر المياه خام<br>مبعثرة وغير موحدة<br>لا يمكن تحليلها مباشرة</div>
+          <span class="ba-tag before">قبل</span>
+        </div>
+        <div class="ba-side">
+          <div class="ba-placeholder">ملف نتائج نظيف ومنظم<br>جاهز لدعم قرارات<br>التخطيط العقاري والتراثي</div>
+          <span class="ba-tag after">بعد</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-num">01</span>
+          <span class="chip">Python</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">openpyxl</span>
+          <span class="chip">Excel</span>
+        </div>
+        <h3>تحليل مصادر المياه — Python</h3>
+        <p class="desc">بيانات مصادر المياه في جدة التاريخية كانت خاماً ومبعثرة بدون معالجة. بنيت سكريبت Python يقرأ البيانات، يُنظّفها، يُصنّف المصادر، ويُصدر ملف نتائج نهائي منظم يدعم فريق الإسناد العقاري في اتخاذ قرارات مدروسة بشأن المصادر المائية التاريخية والحالية في المنطقة.</p>
+        <ul class="hl">
+          <li>معالجة وتنظيف بيانات جيو-تاريخية من مصادر متعددة ومتباينة</li>
+          <li>تصنيف مصادر المياه وتوحيد التسميات والبيانات الوصفية تلقائياً</li>
+          <li>تصدير ملف نتائج Excel نهائي منظم ومنسّق جاهز للاستخدام الفوري</li>
+        </ul>
+        <div class="result">
+          <span class="result-l">النتيجة:</span>
+          <span class="result-v">بيانات خام → ملف نتائج نظيف يدعم قرارات التراث والعقار مباشرة</span>
+        </div>
+      </div>
+      <div class="proj-links">
+        <a href="project01_water_sources.py" class="dl-btn" download>⬇ تحميل كود Python</a>
+      </div>
+    </article>
+
+    <!-- 02 -->
+    <article class="project-card">
+      <div class="ba-wrap">
+        <div class="ba-side">
+          <div class="ba-placeholder">11 ملف Excel لـ 7 مديرات مشاريع<br>لا يمكن مقارنتها أو تجميعها<br>بدون عمل يدوي مضني</div>
+          <span class="ba-tag before">قبل</span>
+        </div>
+        <div class="ba-side">
+          <div class="ba-placeholder">تقرير موحد + داشبورد Power BI<br>يعرض العقود والجنسيات والأدوار<br>للإدارة بضغطة واحدة</div>
+          <span class="ba-tag after">بعد</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-num">02</span>
+          <span class="chip">Python</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">Excel</span>
+          <span class="chip">Power BI</span>
+        </div>
+        <h3>توحيد بيانات مديرات المشاريع — Python + Power BI</h3>
+        <p class="desc">11 ملف Excel مبعثر لـ 7 مديرات مشاريع مختلفات، كل واحدة بصيغتها الخاصة، مستحيل تجميعها يدوياً. بنيت سكريبت Python يدمج هذه الملفات ويُنظّف البيانات ويُقسّم المخرجات إلى شيتات متخصصة — مع داشبورد Power BI تفاعلي للإدارة.</p>
+        <ul class="hl">
+          <li>دمج 11 ملف من 7 مصادر مختلفة في قاعدة بيانات موحدة ونظيفة</li>
+          <li>تقسيم تلقائي إلى شيتات: جنسيات، مشاريع، أدوار، تمديدات، عقود منتهية</li>
+          <li>كشف العقود المنتهية والمقاربة على الانتهاء وعزلها في شيتات منفصلة</li>
+          <li>داشبورد Power BI: توزيع الموظفين، معدل الاستقالات، العقود الحرجة قريباً</li>
+        </ul>
+        <div class="result">
+          <span class="result-l">النتيجة:</span>
+          <span class="result-v">رؤية موحدة لكامل القوى العاملة عبر المشاريع — جاهزة للإدارة في ثوانٍ</span>
+        </div>
+      </div>
+      <div class="proj-links">
+        <a href="project02_ihr_dashboard.pbix" class="dl-btn" download>⬇ تحميل داشبورد Power BI</a>
+        <a href="project02_ihr_managers.xlsx" class="dl-btn" download>⬇ تحميل ملف Excel</a>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="project-card">
+      <div class="ba-wrap">
+        <div class="ba-side">
+          <div class="ba-placeholder">ملفات مطالبات شهرية متفرقة<br>بأوامر شراء مختلفة<br>لا ترابط بينها</div>
+          <span class="ba-tag before">قبل</span>
+        </div>
+        <div class="ba-side">
+          <div class="ba-placeholder">قاعدة بيانات SQL كاملة<br>+ داشبورد Power BI<br>للمراجعة والتدقيق الفوري</div>
+          <span class="ba-tag after">بعد</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-num">03</span>
+          <span class="chip">SQL</span>
+          <span class="chip">SQLite</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Power BI</span>
+        </div>
+        <h3>قاعدة بيانات مطالبات الرواتب — SQL + Power BI</h3>
+        <p class="desc">مطالبات رواتب موزعة على أشهر متعددة وأوامر شراء مختلفة بدون قاعدة بيانات تربطها. صممت قاعدة بيانات علائقية من الصفر بـ SQL وPostgreSQL مع استعلامات تحليلية متقدمة وداشبورد Power BI يعرض التكاليف الإجمالية ويربطها بمستندات التسليم الرسمية.</p>
+        <ul class="hl">
+          <li>بناء قاعدة بيانات علائقية تغطي أكثر من 10 دورات مطالبة متتالية</li>
+          <li>Window Functions لحساب نسبة كل موظف من إجمالي التكلفة وترتيبه شهرياً</li>
+          <li>Subquery لاستخراج الموظفين الذين تتجاوز تكلفتهم المتوسط العام</li>
+          <li>داشبورد Power BI: إجمالي التكاليف، توزيع حسب المسمى، مقارنة شهرية</li>
+        </ul>
+        <div class="result">
+          <span class="result-l">النتيجة:</span>
+          <span class="result-v">تدقيق مالي فوري على كل دورة مطالبة بدل مراجعة يدوية ملف ملف</span>
+        </div>
+      </div>
+      <div class="proj-links">
+        <a href="project03_salary_sqlite.sql" class="dl-btn" download>⬇ SQLite</a>
+        <a href="project03_salary_postgresql.sql" class="dl-btn" download>⬇ PostgreSQL</a>
+        <a href="project03_salary_dashboard.pbix" class="dl-btn" download>⬇ داشبورد Power BI</a>
+      </div>
+    </article>
+
+    <!-- 04 -->
+    <article class="project-card">
+      <div class="ba-wrap">
+        <div class="ba-side">
+          <div class="ba-placeholder">15 ملف مطالبات شهرية<br>على مدى 14 شهراً<br>مستحيل مقارنتها معاً</div>
+          <span class="ba-tag before">قبل</span>
+        </div>
+        <div class="ba-side">
+          <div class="ba-placeholder">ملف Excel موحد + داشبورد<br>يعرض 14 شهراً في لوحة واحدة<br>مع إمكانية التصدير الفوري</div>
+          <span class="ba-tag after">بعد</span>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-meta">
+          <span class="proj-num">04</span>
+          <span class="chip">Excel</span>
+          <span class="chip">Power BI</span>
+        </div>
+        <h3>توحيد وتحليل البيانات المالية — Excel + Power BI</h3>
+        <p class="desc">15 ملف مطالبات شهرية مبعثرة تغطي 14 شهراً متتالياً عبر منافذ تشغيلية متعددة بدون طريقة لمقارنتها. وحّدت جميع الملفات في نموذج Excel منظم يُغذّي داشبورد Power BI تفاعلي يعطي الإدارة رؤية مالية شاملة قابلة للتفصيل حسب الشهر والمنفذ والموظف.</p>
+        <ul class="hl">
+          <li>دمج 15 ملف شهري في 3 شيتات: بيانات موحدة، ملخص شهري، وثائق مرجعية</li>
+          <li>تنظيف أكثر من 7,000 صف بيانات مالية وتوحيد الصيغ والتسميات</li>
+          <li>داشبورد Power BI: إجمالي التكاليف، توزيع الموظفين، تحليل 10 منافذ تشغيلية</li>
+          <li>تقارير قابلة للتصدير الفوري جاهزة للعرض أمام الإدارة</li>
+        </ul>
+        <div class="result">
+          <span class="result-l">النتيجة:</span>
+          <span class="result-v">رؤية مالية شاملة لـ 14 شهر في لوحة واحدة — بدل 15 ملف لا يمكن مقارنتها</span>
+        </div>
+      </div>
+      <div class="proj-links">
+        <a href="project04_nusk_data.xlsx" class="dl-btn" download>⬇ تحميل ملف Excel الموحد</a>
+        <a href="project04_nusk_dashboard.pbix" class="dl-btn" download>⬇ تحميل داشبورد Power BI</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-sec" id="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">LET'S WORK TOGETHER</div>
+    <h2>مستعدة للفرصة القادمة</h2>
+    <p>أبحث عن فريق يؤمن بأن القرار الصح يبدأ من بيانات نظيفة. تواصلي معي.</p>
+    <div class="contact-links">
+      <a href="mailto:Reyoofas12@gmail.com" class="hero-btn" style="margin-bottom:0">Reyoofas12@gmail.com</a>
+      <a href="#" class="hero-btn" style="margin-bottom:0;background:transparent;border:1px solid var(--bb);color:var(--t1);">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <p>© 2026 ريوف سحبان</p>
+    <p style="font-family:var(--mono);font-size:12px;color:var(--t3);">Riyadh, Saudi Arabia</p>
+  </div>
+</footer>
+
+</body>
+</html>
