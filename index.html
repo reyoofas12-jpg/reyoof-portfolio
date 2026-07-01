@@ -1,13 +1,13 @@
 
 <!DOCTYPE html>
-<!-- saved from url=(0050)https://reyoofas12-jpg.github.io/reyoof-portfolio/ -->
-<html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ريوف سحبان — محللة بيانات</title>
+<title id="page-title">ريوف سحبان — محللة بيانات</title>
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-<link href="./ريوف سحبان — محللة بيانات11_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0E1116; --bg-e:#161B24; --bg-card:#131822;
@@ -30,14 +30,21 @@ body{background:var(--bg);color:var(--t1);font-family:var(--sans);line-height:1.
 
 /* NAV */
 nav{position:fixed;top:0;right:0;left:0;z-index:100;background:rgba(14,17,22,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--b);}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;}
-.logo{font-family:var(--mono);font-size:14px;display:flex;align-items:center;gap:8px;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px;}
+.logo{font-family:var(--mono);font-size:14px;display:flex;align-items:center;gap:8px;white-space:nowrap;}
 .logo-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);}
 .nav-links{display:flex;gap:28px;list-style:none;}
 .nav-links a{color:var(--t2);text-decoration:none;font-size:14px;transition:color .2s;}
 .nav-links a:hover{color:var(--t1);}
+.nav-right{display:flex;align-items:center;gap:12px;}
 .nav-cta{background:var(--blue);color:#fff;padding:8px 18px;border-radius:6px;font-size:13px;text-decoration:none;font-weight:500;transition:background .2s;}
 .nav-cta:hover{background:#5B9AE0;}
+#langToggle{
+  font-family:var(--mono);font-size:12px;font-weight:600;
+  background:transparent;color:var(--t1);border:1px solid var(--bb);
+  padding:7px 14px;border-radius:6px;cursor:pointer;transition:all .2s;
+}
+#langToggle:hover{border-color:var(--blue);color:var(--blue);}
 @media(max-width:680px){.nav-links{display:none;}}
 
 /* HERO */
@@ -86,7 +93,7 @@ nav{position:fixed;top:0;right:0;left:0;z-index:100;background:rgba(14,17,22,.92
 .ba-tag{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:10px;font-weight:600;padding:3px 9px;border-radius:4px;}
 .ba-tag.before{background:rgba(217,104,76,.9);color:#fff;}
 .ba-tag.after{background:rgba(76,175,130,.9);color:#fff;}
-.ba-placeholder{font-family:var(--mono);font-size:11px;color:var(--t3);text-align:center;padding:32px 20px;line-height:1.9;}
+.ba-placeholder{font-family:var(--mono);font-size:11px;color:var(--t3);text-align:center;padding:32px 20px;line-height:1.9;white-space:pre-line;}
 .proj-body{padding:26px 28px 0;}
 .proj-meta{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
 .proj-num{font-family:var(--mono);font-size:12px;color:var(--gold);}
@@ -112,6 +119,12 @@ nav{position:fixed;top:0;right:0;left:0;z-index:100;background:rgba(14,17,22,.92
 footer{border-top:1px solid var(--b);padding:26px 0;}
 .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 footer p{color:var(--t3);font-size:13px;}
+
+/* LTR (English) overrides for direction-sensitive elements */
+html[dir="ltr"] .hl li{padding-right:0;padding-left:16px;}
+html[dir="ltr"] .hl li::before{right:auto;left:0;}
+html[dir="ltr"] .result{border-right:none;border-left:3px solid var(--green);}
+html[dir="ltr"] .ba-side:first-child{border-left:none;border-right:1px solid var(--b);}
 </style>
 </head>
 <body>
@@ -121,12 +134,15 @@ footer p{color:var(--t3);font-size:13px;}
   <div class="wrap nav-inner">
     <div class="logo"><span class="logo-dot"></span>ريوف سحبان</div>
     <ul class="nav-links">
-      <li><a href="#skills">المهارات</a></li>
-      <li><a href="#about">نبذة</a></li>
-      <li><a href="#projects">المشاريع</a></li>
-      <li><a href="#contact">للتواصل</a></li>
+      <li><a href="#skills" id="nav-skills">المهارات</a></li>
+      <li><a href="#about" id="nav-about">نبذة</a></li>
+      <li><a href="#projects" id="nav-projects">المشاريع</a></li>
+      <li><a href="#contact" id="nav-contact">للتواصل</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">للتواصل</a>
+    <div class="nav-right">
+      <button id="langToggle" type="button">EN</button>
+      <a href="#contact" class="nav-cta" id="nav-cta">للتواصل</a>
+    </div>
   </div>
 </nav>
 
@@ -134,28 +150,28 @@ footer p{color:var(--t3);font-size:13px;}
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">DATA ANALYST</div>
-    <h1>بيانات فوضى،<br>تم تحويلها إلى <span>قرارات</span></h1>
-    <p class="hero-desc">
+    <h1 id="hero-title">بيانات فوضى،<br>تم تحويلها إلى <span>قرارات</span></h1>
+    <p class="hero-desc" id="hero-desc">
       محللة بيانات أبني حلولاً تحليلية متكاملة من الصفر:<br>
       تنظيف البيانات، أتمتة التقارير، وداشبوردات تفاعلية باستخدام Python وSQL وExcel وPower BI.
     </p>
-    <a href="#projects" class="hero-btn">لمشاهدة مشاريعي ↓</a>
+    <a href="#projects" class="hero-btn" id="hero-btn">لمشاهدة مشاريعي ↓</a>
     <div class="stat-strip">
       <div class="stat-cell">
         <div class="stat-num"><span>+10</span></div>
-        <div class="stat-label">مشاريع مكتملة</div>
+        <div class="stat-label" id="stat-label-1">مشاريع مكتملة</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num"><span>+14K</span></div>
-        <div class="stat-label">صف بيانات محلّل</div>
+        <div class="stat-label" id="stat-label-2">صف بيانات محلّل</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num"><span>+10</span></div>
-        <div class="stat-label">ملف Excel موحّد</div>
+        <div class="stat-label" id="stat-label-3">ملف Excel موحّد</div>
       </div>
       <div class="stat-cell">
         <div class="stat-num"><span>4</span></div>
-        <div class="stat-label">أداة تحليل متقنة</div>
+        <div class="stat-label" id="stat-label-4">أداة تحليل متقنة</div>
       </div>
     </div>
   </div>
@@ -164,8 +180,8 @@ footer p{color:var(--t3);font-size:13px;}
 <!-- SKILLS -->
 <section class="skills-sec" id="skills">
   <div class="wrap">
-    <div class="sec-tag">// المهارات</div>
-    <div class="sec-h">الأدوات التي أستخدمها</div>
+    <div class="sec-tag" id="skills-tag">// المهارات</div>
+    <div class="sec-h" id="skills-heading">الأدوات التي أستخدمها</div>
     <div class="tools-grid">
       <div class="tool-card">
         <div class="tool-logo">
@@ -175,7 +191,7 @@ footer p{color:var(--t3);font-size:13px;}
           </svg>
         </div>
         <div class="tool-name">Microsoft Excel</div>
-        <div class="tool-desc">تجميع · تنظيف · نمذجة بيانات</div>
+        <div class="tool-desc" id="tool-desc-1">تجميع · تنظيف · نمذجة بيانات</div>
       </div>
       <div class="tool-card">
         <div class="tool-logo">
@@ -186,7 +202,7 @@ footer p{color:var(--t3);font-size:13px;}
           </svg>
         </div>
         <div class="tool-name">Power BI</div>
-        <div class="tool-desc">داشبوردات · تقارير · DAX</div>
+        <div class="tool-desc" id="tool-desc-2">داشبوردات · تقارير · DAX</div>
       </div>
       <div class="tool-card">
         <div class="tool-logo">
@@ -197,7 +213,7 @@ footer p{color:var(--t3);font-size:13px;}
           </svg>
         </div>
         <div class="tool-name">Python</div>
-        <div class="tool-desc">Pandas · openpyxl · أتمتة</div>
+        <div class="tool-desc" id="tool-desc-3">Pandas · openpyxl · أتمتة</div>
       </div>
       <div class="tool-card">
         <div class="tool-logo">
@@ -207,7 +223,7 @@ footer p{color:var(--t3);font-size:13px;}
           </svg>
         </div>
         <div class="tool-name">SQL</div>
-        <div class="tool-desc">SQLite · PostgreSQL · تحليل</div>
+        <div class="tool-desc" id="tool-desc-4">SQLite · PostgreSQL · تحليل</div>
       </div>
     </div>
   </div>
@@ -216,22 +232,22 @@ footer p{color:var(--t3);font-size:13px;}
 <!-- ABOUT -->
 <section class="about-sec" id="about">
   <div class="wrap">
-    <div class="sec-tag">// نبذة</div>
+    <div class="sec-tag" id="about-tag">// نبذة</div>
     <div class="about-grid">
       <div class="about-text">
-        <div class="sec-h" style="margin-bottom:20px">من أنا</div>
-        <p>محللة بيانات أؤمن أن قيمة العمل التحليلي الحقيقية ليست في الأدوات، بل في القدرة على <strong>فهم المشكلة أولاً</strong> — ثم الوصول إلى إجابة واضحة وقابلة للتنفيذ.</p>
-        <p>في كل مشروع أبدأ بتشريح البيانات وفهم جودتها وسياقها قبل أي خطوة تحليلية، وأنتهي بمخرج يخدم صانع القرار مباشرة — لأن <strong>البيانات بدون قرار مجرد أرقام</strong>.</p>
-        <p>عملت على مشاريع حقيقية متنوعة وطوّرت خلالها قدرة عالية على <strong>تحويل الفوضى إلى نظام</strong>.</p>
+        <div class="sec-h" style="margin-bottom:20px" id="about-heading">من أنا</div>
+        <p id="about-p1">محللة بيانات أؤمن أن قيمة العمل التحليلي الحقيقية ليست في الأدوات، بل في القدرة على <strong>فهم المشكلة أولاً</strong> — ثم الوصول إلى إجابة واضحة وقابلة للتنفيذ.</p>
+        <p id="about-p2">في كل مشروع أبدأ بتشريح البيانات وفهم جودتها وسياقها قبل أي خطوة تحليلية، وأنتهي بمخرج يخدم صانع القرار مباشرة — لأن <strong>البيانات بدون قرار مجرد أرقام</strong>.</p>
+        <p id="about-p3">عملت على مشاريع حقيقية متنوعة وطوّرت خلالها قدرة عالية على <strong>تحويل الفوضى إلى نظام</strong>.</p>
       </div>
       <div style="background:var(--bg-card);border:1px solid var(--b);border-radius:var(--r);padding:24px;">
-        <div style="font-family:var(--mono);font-size:12px;color:var(--t3);margin-bottom:16px;">// التخصصات</div>
+        <div style="font-family:var(--mono);font-size:12px;color:var(--t3);margin-bottom:16px;" id="spec-tag">// التخصصات</div>
         <div style="display:flex;flex-direction:column;gap:10px;">
-          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">📊 تنظيف وتحضير البيانات الخام</div>
-          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">⚙️ أتمتة التقارير بـ Python</div>
-          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">🗄️ بناء قواعد البيانات وتحليلها بـ SQL</div>
-          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">📈 داشبوردات تفاعلية بـ Power BI</div>
-          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);">🔗 دمج وتوحيد مصادر بيانات متعددة</div>
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);" id="spec-1">📊 تنظيف وتحضير البيانات الخام</div>
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);" id="spec-2">⚙️ أتمتة التقارير بـ Python</div>
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);" id="spec-3">🗄️ بناء قواعد البيانات وتحليلها بـ SQL</div>
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);" id="spec-4">📈 داشبوردات تفاعلية بـ Power BI</div>
+          <div style="background:var(--bg-e);border-radius:6px;padding:10px 14px;font-size:13.5px;color:var(--t1);" id="spec-5">🔗 دمج وتوحيد مصادر بيانات متعددة</div>
         </div>
       </div>
     </div>
@@ -241,19 +257,23 @@ footer p{color:var(--t3);font-size:13px;}
 <!-- PROJECTS -->
 <section class="projects-sec" id="projects">
   <div class="wrap">
-    <div class="sec-tag">// المشاريع</div>
-    <div class="sec-h">مشاريع حقيقية، نتائج قابلة للقياس</div>
+    <div class="sec-tag" id="proj-tag">// المشاريع</div>
+    <div class="sec-h" id="proj-heading">مشاريع حقيقية، نتائج قابلة للقياس</div>
 
     <!-- 01 -->
     <article class="project-card">
       <div class="ba-wrap">
         <div class="ba-side">
-          <div class="ba-placeholder">209 موظف من 3 قطاعات<br>سجلات ناقصة وأوقات مبعثرة<br>لا يمكن معالجتها يدوياً</div>
-          <span class="ba-tag before">قبل</span>
+          <div class="ba-placeholder" id="p1-before">209 موظف من 3 قطاعات
+سجلات ناقصة وأوقات مبعثرة
+لا يمكن معالجتها يدوياً</div>
+          <span class="ba-tag before" id="p1-tag-before">قبل</span>
         </div>
         <div class="ba-side">
-          <div class="ba-placeholder">3,492 صف تقرير يومي مفصّل<br>مُصنَّف ومُنسَّق تلقائياً<br>جاهز للمراجعة الفورية</div>
-          <span class="ba-tag after">بعد</span>
+          <div class="ba-placeholder" id="p1-after">3,492 صف تقرير يومي مفصّل
+مُصنَّف ومُنسَّق تلقائياً
+جاهز للمراجعة الفورية</div>
+          <span class="ba-tag after" id="p1-tag-after">بعد</span>
         </div>
       </div>
       <div class="proj-body">
@@ -264,22 +284,22 @@ footer p{color:var(--t3);font-size:13px;}
           <span class="chip">openpyxl</span>
           <span class="chip">Excel</span>
         </div>
-        <h3>أتمتة تقارير الحضور — Python + Excel</h3>
-        <p class="desc">بيانات حضور خام لـ209 موظف من 3 قطاعات — سجلات ناقصة، أوقات غير مكتملة، وحالات غير موحدة تجعل التحليل اليدوي مستحيلاً. بنيت سكريبت Python يعالج هذه التعقيدات بالكامل: يكتشف كل نقص، يعوّضه ذكياً من سجلات الموظف التاريخية أو وقت نوبته الرسمي، ثم يُخرج تقرير Excel احترافياً منسّقاً ومصنّفاً جاهزاً للتسليم — بدل ساعات من التدقيق اليدوي المتكرر.</p>
+        <h3 id="p1-title">أتمتة تقارير الحضور — Python + Excel</h3>
+        <p class="desc" id="p1-desc">بيانات حضور خام لـ209 موظف من 3 قطاعات — سجلات ناقصة، أوقات غير مكتملة، وحالات غير موحدة تجعل التحليل اليدوي مستحيلاً. بنيت سكريبت Python يعالج هذه التعقيدات بالكامل: يكتشف كل نقص، يعوّضه ذكياً من سجلات الموظف التاريخية أو وقت نوبته الرسمي، ثم يُخرج تقرير Excel احترافياً منسّقاً ومصنّفاً جاهزاً للتسليم — بدل ساعات من التدقيق اليدوي المتكرر.</p>
         <ul class="hl">
-          <li>تصنيف تلقائي لكل يوم: حاضر / غائب / إجازة / راحة مع احتساب الساعات الفعلية لكل حالة بدقة</li>
-          <li>خوارزمية تعويض ذكية تبحث عن أقرب سجل سابق للموظف، وإن لم يوجد تعود لوقت نوبته الرسمي تلقائياً</li>
-          <li>احتساب دقائق التأخير والمغادرة المبكرة مع استثناء الفروقات الطفيفة (أقل من 16 دقيقة) تلقائياً</li>
-          <li>تنسيق Excel متكامل: ألوان مميزة لكل حالة، تجميد الصفوف، اتجاه RTL كامل، جاهز للطباعة والمشاركة</li>
+          <li id="p1-hl1">تصنيف تلقائي لكل يوم: حاضر / غائب / إجازة / راحة مع احتساب الساعات الفعلية لكل حالة بدقة</li>
+          <li id="p1-hl2">خوارزمية تعويض ذكية تبحث عن أقرب سجل سابق للموظف، وإن لم يوجد تعود لوقت نوبته الرسمي تلقائياً</li>
+          <li id="p1-hl3">احتساب دقائق التأخير والمغادرة المبكرة مع استثناء الفروقات الطفيفة (أقل من 16 دقيقة) تلقائياً</li>
+          <li id="p1-hl4">تنسيق Excel متكامل: ألوان مميزة لكل حالة، تجميد الصفوف، اتجاه RTL كامل، جاهز للطباعة والمشاركة</li>
         </ul>
         <div class="result">
-          <span class="result-l">النتيجة:</span>
-          <span class="result-v">209 موظف × بيانات يومية كاملة = 3,492 صف تقرير دقيق ومفصّل — يُنجز في ثوانٍ بديلاً عن ساعات</span>
+          <span class="result-l" id="result-label-1">النتيجة:</span>
+          <span class="result-v" id="p1-result">209 موظف × بيانات يومية كاملة = 3,492 صف تقرير دقيق ومفصّل — يُنجز في ثوانٍ بديلاً عن ساعات</span>
         </div>
       </div>
       <div class="proj-links">
-        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project01_attendance.py" class="dl-btn">⬇ كود Python</a>
-        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project01_attendance_result.xlsx" class="dl-btn">⬇ ملف النتائج Excel</a>
+        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project01_attendance.py" class="dl-btn" id="p1-btn1">⬇ كود Python</a>
+        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project01_attendance_result.xlsx" class="dl-btn" id="p1-btn2">⬇ ملف النتائج Excel</a>
       </div>
     </article>
 
@@ -287,12 +307,16 @@ footer p{color:var(--t3);font-size:13px;}
     <article class="project-card">
       <div class="ba-wrap">
         <div class="ba-side">
-          <div class="ba-placeholder">11 ملف Excel لـ 7 مدراء مشاريع<br>لا يمكن مقارنتها أو تجميعها<br>بدون جهد يدوي كبير</div>
-          <span class="ba-tag before">قبل</span>
+          <div class="ba-placeholder" id="p2-before">11 ملف Excel لـ 7 مدراء مشاريع
+لا يمكن مقارنتها أو تجميعها
+بدون جهد يدوي كبير</div>
+          <span class="ba-tag before" id="p2-tag-before">قبل</span>
         </div>
         <div class="ba-side">
-          <div class="ba-placeholder">تقرير موحد + داشبورد Power BI<br>يعرض العقود والجنسيات والأدوار<br>للإدارة بضغطة واحدة</div>
-          <span class="ba-tag after">بعد</span>
+          <div class="ba-placeholder" id="p2-after">تقرير موحد + داشبورد Power BI
+يعرض العقود والجنسيات والأدوار
+للإدارة بضغطة واحدة</div>
+          <span class="ba-tag after" id="p2-tag-after">بعد</span>
         </div>
       </div>
       <div class="proj-body">
@@ -303,23 +327,23 @@ footer p{color:var(--t3);font-size:13px;}
           <span class="chip">Excel</span>
           <span class="chip">Power BI</span>
         </div>
-        <h3>توحيد بيانات مدراء المشاريع — Python + Power BI</h3>
-        <p class="desc">11 ملف Excel مبعثر لـ 7 مدراء مشاريع، كل ملف بصيغته الخاصة، يصعب تجميعها يدوياً. تم بناء سكريبت Python يدمج هذه الملفات ويُنظّف البيانات ويُقسّم المخرجات إلى Sheets متخصصة — مع داشبورد Power BI تفاعلي للإدارة.</p>
+        <h3 id="p2-title">توحيد بيانات مدراء المشاريع — Python + Power BI</h3>
+        <p class="desc" id="p2-desc">11 ملف Excel مبعثر لـ 7 مدراء مشاريع، كل ملف بصيغته الخاصة، يصعب تجميعها يدوياً. تم بناء سكريبت Python يدمج هذه الملفات ويُنظّف البيانات ويُقسّم المخرجات إلى Sheets متخصصة — مع داشبورد Power BI تفاعلي للإدارة.</p>
         <ul class="hl">
-          <li>دمج 11 ملف من 7 مصادر مختلفة في قاعدة بيانات موحدة ونظيفة</li>
-          <li>تقسيم تلقائي إلى Sheets: جنسيات، مشاريع، أدوار، تمديدات، عقود منتهية</li>
-          <li>كشف العقود المنتهية والمقاربة على الانتهاء وتصنيفها في Sheets منفصلة</li>
-          <li>داشبورد Power BI: توزيع الموظفين، معدل الاستقالات، العقود المنتهية والقريبة من الانتهاء</li>
+          <li id="p2-hl1">دمج 11 ملف من 7 مصادر مختلفة في قاعدة بيانات موحدة ونظيفة</li>
+          <li id="p2-hl2">تقسيم تلقائي إلى Sheets: جنسيات، مشاريع، أدوار، تمديدات، عقود منتهية</li>
+          <li id="p2-hl3">كشف العقود المنتهية والمقاربة على الانتهاء وتصنيفها في Sheets منفصلة</li>
+          <li id="p2-hl4">داشبورد Power BI: توزيع الموظفين، معدل الاستقالات، العقود المنتهية والقريبة من الانتهاء</li>
         </ul>
         <div class="result">
-          <span class="result-l">النتيجة:</span>
-          <span class="result-v">رؤية موحدة لكامل القوى العاملة عبر المشاريع — جاهزة للإدارة في ثوانٍ</span>
+          <span class="result-l" id="result-label-2">النتيجة:</span>
+          <span class="result-v" id="p2-result">رؤية موحدة لكامل القوى العاملة عبر المشاريع — جاهزة للإدارة في ثوانٍ</span>
         </div>
       </div>
       <div class="proj-links">
-        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project02_ihr_dashboard.pbix" class="dl-btn">⬇ داشبورد Power BI</a>
-        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project02_ihr_managers.xlsx" class="dl-btn">⬇ ملف Excel الموحد</a>
-        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project02_ihr_results.xlsx" class="dl-btn">⬇ ملف النتائج Excel</a>
+        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project02_ihr_dashboard.pbix" class="dl-btn" id="p2-btn1">⬇ داشبورد Power BI</a>
+        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project02_ihr_managers.xlsx" class="dl-btn" id="p2-btn2">⬇ ملف Excel الموحد</a>
+        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project02_ihr_results.xlsx" class="dl-btn" id="p2-btn3">⬇ ملف النتائج Excel</a>
       </div>
     </article>
 
@@ -327,12 +351,16 @@ footer p{color:var(--t3);font-size:13px;}
     <article class="project-card">
       <div class="ba-wrap">
         <div class="ba-side">
-          <div class="ba-placeholder">ملفات مطالبات شهرية متفرقة<br>بأوامر شراء مختلفة<br>لا ترابط بينها</div>
-          <span class="ba-tag before">قبل</span>
+          <div class="ba-placeholder" id="p3-before">ملفات مطالبات شهرية متفرقة
+بأوامر شراء مختلفة
+لا ترابط بينها</div>
+          <span class="ba-tag before" id="p3-tag-before">قبل</span>
         </div>
         <div class="ba-side">
-          <div class="ba-placeholder">قاعدة بيانات SQL كاملة<br>+ داشبورد Power BI<br>للمراجعة والتدقيق الفوري</div>
-          <span class="ba-tag after">بعد</span>
+          <div class="ba-placeholder" id="p3-after">قاعدة بيانات SQL كاملة
++ داشبورد Power BI
+للمراجعة والتدقيق الفوري</div>
+          <span class="ba-tag after" id="p3-tag-after">بعد</span>
         </div>
       </div>
       <div class="proj-body">
@@ -343,23 +371,23 @@ footer p{color:var(--t3);font-size:13px;}
           <span class="chip">PostgreSQL</span>
           <span class="chip">Power BI</span>
         </div>
-        <h3>قاعدة بيانات مطالبات الرواتب — SQL + Power BI</h3>
-        <p class="desc">مطالبات رواتب موزعة على أشهر متعددة وأوامر شراء مختلفة بدون قاعدة بيانات تربطها. تم تصميم قاعدة بيانات علائقية من الصفر بـ SQL وPostgreSQL مع استعلامات تحليلية متقدمة وداشبورد Power BI يعرض التكاليف الإجمالية ويربطها بمستندات التسليم الرسمية.</p>
+        <h3 id="p3-title">قاعدة بيانات مطالبات الرواتب — SQL + Power BI</h3>
+        <p class="desc" id="p3-desc">مطالبات رواتب موزعة على أشهر متعددة وأوامر شراء مختلفة بدون قاعدة بيانات تربطها. تم تصميم قاعدة بيانات علائقية من الصفر بـ SQL وPostgreSQL مع استعلامات تحليلية متقدمة وداشبورد Power BI يعرض التكاليف الإجمالية ويربطها بمستندات التسليم الرسمية.</p>
         <ul class="hl">
-          <li>بناء قاعدة بيانات علائقية تغطي أكثر من 10 دورات مطالبة متتالية</li>
-          <li>Window Functions لحساب نسبة كل موظف من إجمالي التكلفة وترتيبه شهرياً</li>
-          <li>Subquery لاستخراج الموظفين الذين تتجاوز تكلفتهم المتوسط العام</li>
-          <li>داشبورد Power BI: إجمالي التكاليف، توزيع حسب المسمى، مقارنة شهرية</li>
+          <li id="p3-hl1">بناء قاعدة بيانات علائقية تغطي أكثر من 10 دورات مطالبة متتالية</li>
+          <li id="p3-hl2">Window Functions لحساب نسبة كل موظف من إجمالي التكلفة وترتيبه شهرياً</li>
+          <li id="p3-hl3">Subquery لاستخراج الموظفين الذين تتجاوز تكلفتهم المتوسط العام</li>
+          <li id="p3-hl4">داشبورد Power BI: إجمالي التكاليف، توزيع حسب المسمى، مقارنة شهرية</li>
         </ul>
         <div class="result">
-          <span class="result-l">النتيجة:</span>
-          <span class="result-v">تدقيق مالي فوري على كل دورة مطالبة بديلاً عن المراجعة اليدوية ملف ملف</span>
+          <span class="result-l" id="result-label-3">النتيجة:</span>
+          <span class="result-v" id="p3-result">تدقيق مالي فوري على كل دورة مطالبة بديلاً عن المراجعة اليدوية ملف ملف</span>
         </div>
       </div>
       <div class="proj-links">
         <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project03_salary_sqlite.sql" class="dl-btn">⬇ SQLite</a>
         <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project03_salary_postgresql.sql" class="dl-btn">⬇ PostgreSQL</a>
-        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project03_salary_dashboard.pbix" class="dl-btn">⬇ داشبورد Power BI</a>
+        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project03_salary_dashboard.pbix" class="dl-btn" id="p3-btn3">⬇ داشبورد Power BI</a>
       </div>
     </article>
 
@@ -367,12 +395,16 @@ footer p{color:var(--t3);font-size:13px;}
     <article class="project-card">
       <div class="ba-wrap">
         <div class="ba-side">
-          <div class="ba-placeholder">15 ملف مطالبات شهرية<br>على مدى 14 شهراً<br>لا يمكن مقارنتها معاً</div>
-          <span class="ba-tag before">قبل</span>
+          <div class="ba-placeholder" id="p4-before">15 ملف مطالبات شهرية
+على مدى 14 شهراً
+لا يمكن مقارنتها معاً</div>
+          <span class="ba-tag before" id="p4-tag-before">قبل</span>
         </div>
         <div class="ba-side">
-          <div class="ba-placeholder">ملف Excel موحد + داشبورد<br>يعرض 14 شهراً في لوحة واحدة<br>مع إمكانية التصدير الفوري</div>
-          <span class="ba-tag after">بعد</span>
+          <div class="ba-placeholder" id="p4-after">ملف Excel موحد + داشبورد
+يعرض 14 شهراً في لوحة واحدة
+مع إمكانية التصدير الفوري</div>
+          <span class="ba-tag after" id="p4-tag-after">بعد</span>
         </div>
       </div>
       <div class="proj-body">
@@ -381,22 +413,22 @@ footer p{color:var(--t3);font-size:13px;}
           <span class="chip">Excel</span>
           <span class="chip">Power BI</span>
         </div>
-        <h3>توحيد وتحليل البيانات المالية — Excel + Power BI</h3>
-        <p class="desc">15 ملف مطالبات شهرية مبعثرة تغطي 14 شهراً متتالية عبر منافذ تشغيلية متعددة بدون طريقة لمقارنتها. تم توحيد جميع الملفات في نموذج Excel منظم يوضح للإدارة رؤية مالية شاملة قابلة للتفصيل حسب الشهر والمنفذ والموظف.</p>
+        <h3 id="p4-title">توحيد وتحليل البيانات المالية — Excel + Power BI</h3>
+        <p class="desc" id="p4-desc">15 ملف مطالبات شهرية مبعثرة تغطي 14 شهراً متتالية عبر منافذ تشغيلية متعددة بدون طريقة لمقارنتها. تم توحيد جميع الملفات في نموذج Excel منظم يوضح للإدارة رؤية مالية شاملة قابلة للتفصيل حسب الشهر والمنفذ والموظف.</p>
         <ul class="hl">
-          <li>دمج 15 ملف شهري في 3 Sheets: بيانات موحدة، ملخص شهري، وثائق مرجعية</li>
-          <li>معالجة أكثر من 7,000 صف من البيانات المالية وتوحيد الصيغ والتسميات عبر جميع الملفات</li>
-          <li>داشبورد Power BI: إجمالي التكاليف، توزيع الموظفين، تحليل 10 منافذ تشغيلية</li>
-          <li>تقارير قابلة للتصدير الفوري جاهزة للعرض أمام الإدارة</li>
+          <li id="p4-hl1">دمج 15 ملف شهري في 3 Sheets: بيانات موحدة، ملخص شهري، وثائق مرجعية</li>
+          <li id="p4-hl2">معالجة أكثر من 7,000 صف من البيانات المالية وتوحيد الصيغ والتسميات عبر جميع الملفات</li>
+          <li id="p4-hl3">داشبورد Power BI: إجمالي التكاليف، توزيع الموظفين، تحليل 10 منافذ تشغيلية</li>
+          <li id="p4-hl4">تقارير قابلة للتصدير الفوري جاهزة للعرض أمام الإدارة</li>
         </ul>
         <div class="result">
-          <span class="result-l">النتيجة:</span>
-          <span class="result-v">رؤية مالية شاملة لـ 14 شهر في لوحة واحدة — بديلاً عن 15 ملف لا يمكن مقارنتها</span>
+          <span class="result-l" id="result-label-4">النتيجة:</span>
+          <span class="result-v" id="p4-result">رؤية مالية شاملة لـ 14 شهر في لوحة واحدة — بديلاً عن 15 ملف لا يمكن مقارنتها</span>
         </div>
       </div>
       <div class="proj-links">
-        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project04_nusk_data.xlsx" class="dl-btn">⬇ تحميل ملف Excel الموحد</a>
-        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project04_nusk_dashboard.pbix" class="dl-btn">⬇ تحميل داشبورد Power BI</a>
+        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project04_nusk_data.xlsx" class="dl-btn" id="p4-btn1">⬇ تحميل ملف Excel الموحد</a>
+        <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/project04_nusk_dashboard.pbix" class="dl-btn" id="p4-btn2">⬇ تحميل داشبورد Power BI</a>
       </div>
     </article>
 
@@ -408,21 +440,208 @@ footer p{color:var(--t3);font-size:13px;}
   <div class="wrap">
     <div class="eyebrow" style="justify-content:center;">LET'S WORK TOGETHER</div>
     <h2></h2>
-    <p>أبحث عن فرص تؤمن بأن القرارات الصحيحة تبدأ من بيانات دقيقة وموثوقة.</p>
+    <p id="contact-p">أبحث عن فرص تؤمن بأن القرارات الصحيحة تبدأ من بيانات دقيقة وموثوقة.</p>
     <div class="contact-links">
       <a href="mailto:Reyoofas12@gmail.com" class="hero-btn" style="margin-bottom:0">Reyoofas12@gmail.com</a>
-      <a href="https://reyoofas12-jpg.github.io/reyoof-portfolio/#" class="hero-btn" style="margin-bottom:0;background:transparent;border:1px solid var(--bb);color:var(--t1);">LinkedIn ↗</a>
+      <a href="https://www.linkedin.com/" class="hero-btn" style="margin-bottom:0;background:transparent;border:1px solid var(--bb);color:var(--t1);">LinkedIn ↗</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap foot-inner">
-    <p>© 2026 ريوف سحبان</p>
+    <p id="footer-copy">© 2026 ريوف سحبان</p>
     <p style="font-family:var(--mono);font-size:12px;color:var(--t3);">Riyadh, Saudi Arabia</p>
   </div>
 </footer>
 
+<script>
+const translations = {
+  ar: {
+    "page-title": "ريوف سحبان — محللة بيانات",
+    "nav-skills": "المهارات",
+    "nav-about": "نبذة",
+    "nav-projects": "المشاريع",
+    "nav-contact": "للتواصل",
+    "nav-cta": "للتواصل",
+    "hero-title": "بيانات فوضى،<br>تم تحويلها إلى <span>قرارات</span>",
+    "hero-desc": "محللة بيانات أبني حلولاً تحليلية متكاملة من الصفر:<br>تنظيف البيانات، أتمتة التقارير، وداشبوردات تفاعلية باستخدام Python وSQL وExcel وPower BI.",
+    "hero-btn": "لمشاهدة مشاريعي ↓",
+    "stat-label-1": "مشاريع مكتملة",
+    "stat-label-2": "صف بيانات محلّل",
+    "stat-label-3": "ملف Excel موحّد",
+    "stat-label-4": "أداة تحليل متقنة",
+    "skills-tag": "// المهارات",
+    "skills-heading": "الأدوات التي أستخدمها",
+    "tool-desc-1": "تجميع · تنظيف · نمذجة بيانات",
+    "tool-desc-2": "داشبوردات · تقارير · DAX",
+    "tool-desc-3": "Pandas · openpyxl · أتمتة",
+    "tool-desc-4": "SQLite · PostgreSQL · تحليل",
+    "about-tag": "// نبذة",
+    "about-heading": "من أنا",
+    "about-p1": "محللة بيانات أؤمن أن قيمة العمل التحليلي الحقيقية ليست في الأدوات، بل في القدرة على <strong>فهم المشكلة أولاً</strong> — ثم الوصول إلى إجابة واضحة وقابلة للتنفيذ.",
+    "about-p2": "في كل مشروع أبدأ بتشريح البيانات وفهم جودتها وسياقها قبل أي خطوة تحليلية، وأنتهي بمخرج يخدم صانع القرار مباشرة — لأن <strong>البيانات بدون قرار مجرد أرقام</strong>.",
+    "about-p3": "عملت على مشاريع حقيقية متنوعة وطوّرت خلالها قدرة عالية على <strong>تحويل الفوضى إلى نظام</strong>.",
+    "spec-tag": "// التخصصات",
+    "spec-1": "📊 تنظيف وتحضير البيانات الخام",
+    "spec-2": "⚙️ أتمتة التقارير بـ Python",
+    "spec-3": "🗄️ بناء قواعد البيانات وتحليلها بـ SQL",
+    "spec-4": "📈 داشبوردات تفاعلية بـ Power BI",
+    "spec-5": "🔗 دمج وتوحيد مصادر بيانات متعددة",
+    "proj-tag": "// المشاريع",
+    "proj-heading": "مشاريع حقيقية، نتائج قابلة للقياس",
+    "p1-before": "209 موظف من 3 قطاعات\nسجلات ناقصة وأوقات مبعثرة\nلا يمكن معالجتها يدوياً",
+    "p1-after": "3,492 صف تقرير يومي مفصّل\nمُصنَّف ومُنسَّق تلقائياً\nجاهز للمراجعة الفورية",
+    "p1-tag-before": "قبل", "p1-tag-after": "بعد",
+    "p1-title": "أتمتة تقارير الحضور — Python + Excel",
+    "p1-desc": "بيانات حضور خام لـ209 موظف من 3 قطاعات — سجلات ناقصة، أوقات غير مكتملة، وحالات غير موحدة تجعل التحليل اليدوي مستحيلاً. بنيت سكريبت Python يعالج هذه التعقيدات بالكامل: يكتشف كل نقص، يعوّضه ذكياً من سجلات الموظف التاريخية أو وقت نوبته الرسمي، ثم يُخرج تقرير Excel احترافياً منسّقاً ومصنّفاً جاهزاً للتسليم — بدل ساعات من التدقيق اليدوي المتكرر.",
+    "p1-hl1": "تصنيف تلقائي لكل يوم: حاضر / غائب / إجازة / راحة مع احتساب الساعات الفعلية لكل حالة بدقة",
+    "p1-hl2": "خوارزمية تعويض ذكية تبحث عن أقرب سجل سابق للموظف، وإن لم يوجد تعود لوقت نوبته الرسمي تلقائياً",
+    "p1-hl3": "احتساب دقائق التأخير والمغادرة المبكرة مع استثناء الفروقات الطفيفة (أقل من 16 دقيقة) تلقائياً",
+    "p1-hl4": "تنسيق Excel متكامل: ألوان مميزة لكل حالة، تجميد الصفوف، اتجاه RTL كامل، جاهز للطباعة والمشاركة",
+    "p1-result": "209 موظف × بيانات يومية كاملة = 3,492 صف تقرير دقيق ومفصّل — يُنجز في ثوانٍ بديلاً عن ساعات",
+    "p1-btn1": "⬇ كود Python", "p1-btn2": "⬇ ملف النتائج Excel",
+    "p2-before": "11 ملف Excel لـ 7 مدراء مشاريع\nلا يمكن مقارنتها أو تجميعها\nبدون جهد يدوي كبير",
+    "p2-after": "تقرير موحد + داشبورد Power BI\nيعرض العقود والجنسيات والأدوار\nللإدارة بضغطة واحدة",
+    "p2-tag-before": "قبل", "p2-tag-after": "بعد",
+    "p2-title": "توحيد بيانات مدراء المشاريع — Python + Power BI",
+    "p2-desc": "11 ملف Excel مبعثر لـ 7 مدراء مشاريع، كل ملف بصيغته الخاصة، يصعب تجميعها يدوياً. تم بناء سكريبت Python يدمج هذه الملفات ويُنظّف البيانات ويُقسّم المخرجات إلى Sheets متخصصة — مع داشبورد Power BI تفاعلي للإدارة.",
+    "p2-hl1": "دمج 11 ملف من 7 مصادر مختلفة في قاعدة بيانات موحدة ونظيفة",
+    "p2-hl2": "تقسيم تلقائي إلى Sheets: جنسيات، مشاريع، أدوار، تمديدات، عقود منتهية",
+    "p2-hl3": "كشف العقود المنتهية والمقاربة على الانتهاء وتصنيفها في Sheets منفصلة",
+    "p2-hl4": "داشبورد Power BI: توزيع الموظفين، معدل الاستقالات، العقود المنتهية والقريبة من الانتهاء",
+    "p2-result": "رؤية موحدة لكامل القوى العاملة عبر المشاريع — جاهزة للإدارة في ثوانٍ",
+    "p2-btn1": "⬇ داشبورد Power BI", "p2-btn2": "⬇ ملف Excel الموحد", "p2-btn3": "⬇ ملف النتائج Excel",
+    "p3-before": "ملفات مطالبات شهرية متفرقة\nبأوامر شراء مختلفة\nلا ترابط بينها",
+    "p3-after": "قاعدة بيانات SQL كاملة\n+ داشبورد Power BI\nللمراجعة والتدقيق الفوري",
+    "p3-tag-before": "قبل", "p3-tag-after": "بعد",
+    "p3-title": "قاعدة بيانات مطالبات الرواتب — SQL + Power BI",
+    "p3-desc": "مطالبات رواتب موزعة على أشهر متعددة وأوامر شراء مختلفة بدون قاعدة بيانات تربطها. تم تصميم قاعدة بيانات علائقية من الصفر بـ SQL وPostgreSQL مع استعلامات تحليلية متقدمة وداشبورد Power BI يعرض التكاليف الإجمالية ويربطها بمستندات التسليم الرسمية.",
+    "p3-hl1": "بناء قاعدة بيانات علائقية تغطي أكثر من 10 دورات مطالبة متتالية",
+    "p3-hl2": "Window Functions لحساب نسبة كل موظف من إجمالي التكلفة وترتيبه شهرياً",
+    "p3-hl3": "Subquery لاستخراج الموظفين الذين تتجاوز تكلفتهم المتوسط العام",
+    "p3-hl4": "داشبورد Power BI: إجمالي التكاليف، توزيع حسب المسمى، مقارنة شهرية",
+    "p3-result": "تدقيق مالي فوري على كل دورة مطالبة بديلاً عن المراجعة اليدوية ملف ملف",
+    "p3-btn3": "⬇ داشبورد Power BI",
+    "p4-before": "15 ملف مطالبات شهرية\nعلى مدى 14 شهراً\nلا يمكن مقارنتها معاً",
+    "p4-after": "ملف Excel موحد + داشبورد\nيعرض 14 شهراً في لوحة واحدة\nمع إمكانية التصدير الفوري",
+    "p4-tag-before": "قبل", "p4-tag-after": "بعد",
+    "p4-title": "توحيد وتحليل البيانات المالية — Excel + Power BI",
+    "p4-desc": "15 ملف مطالبات شهرية مبعثرة تغطي 14 شهراً متتالية عبر منافذ تشغيلية متعددة بدون طريقة لمقارنتها. تم توحيد جميع الملفات في نموذج Excel منظم يوضح للإدارة رؤية مالية شاملة قابلة للتفصيل حسب الشهر والمنفذ والموظف.",
+    "p4-hl1": "دمج 15 ملف شهري في 3 Sheets: بيانات موحدة، ملخص شهري، وثائق مرجعية",
+    "p4-hl2": "معالجة أكثر من 7,000 صف من البيانات المالية وتوحيد الصيغ والتسميات عبر جميع الملفات",
+    "p4-hl3": "داشبورد Power BI: إجمالي التكاليف، توزيع الموظفين، تحليل 10 منافذ تشغيلية",
+    "p4-hl4": "تقارير قابلة للتصدير الفوري جاهزة للعرض أمام الإدارة",
+    "p4-result": "رؤية مالية شاملة لـ 14 شهر في لوحة واحدة — بديلاً عن 15 ملف لا يمكن مقارنتها",
+    "p4-btn1": "⬇ تحميل ملف Excel الموحد", "p4-btn2": "⬇ تحميل داشبورد Power BI",
+    "result-label-1": "النتيجة:", "result-label-2": "النتيجة:", "result-label-3": "النتيجة:", "result-label-4": "النتيجة:",
+    "contact-p": "أبحث عن فرص تؤمن بأن القرارات الصحيحة تبدأ من بيانات دقيقة وموثوقة.",
+    "footer-copy": "© 2026 ريوف سحبان"
+  },
+  en: {
+    "page-title": "Reyoof Sahban — Data Analyst",
+    "nav-skills": "Skills",
+    "nav-about": "About",
+    "nav-projects": "Projects",
+    "nav-contact": "Contact",
+    "nav-cta": "Contact",
+    "hero-title": "Messy Data,<br>Turned Into <span>Decisions</span>",
+    "hero-desc": "A data analyst who builds complete analytical solutions from scratch:<br>data cleaning, report automation, and interactive dashboards using Python, SQL, Excel, and Power BI.",
+    "hero-btn": "View My Projects ↓",
+    "stat-label-1": "Projects Completed",
+    "stat-label-2": "Data Rows Analyzed",
+    "stat-label-3": "Excel Files Unified",
+    "stat-label-4": "Analysis Tools Mastered",
+    "skills-tag": "// Skills",
+    "skills-heading": "Tools I Use",
+    "tool-desc-1": "Aggregation · Cleaning · Data Modeling",
+    "tool-desc-2": "Dashboards · Reports · DAX",
+    "tool-desc-3": "Pandas · openpyxl · Automation",
+    "tool-desc-4": "SQLite · PostgreSQL · Analysis",
+    "about-tag": "// About",
+    "about-heading": "About Me",
+    "about-p1": "I'm a data analyst who believes the real value of analytical work isn't in the tools — it's in the ability to <strong>understand the problem first</strong>, then arrive at a clear, actionable answer.",
+    "about-p2": "In every project, I start by dissecting the data and understanding its quality and context before any analytical step, and I finish with an output that directly serves the decision-maker — because <strong>data without a decision is just numbers</strong>.",
+    "about-p3": "I've worked on a range of real projects and developed a strong ability to <strong>turn chaos into structure</strong>.",
+    "spec-tag": "// Specialties",
+    "spec-1": "📊 Raw data cleaning and preparation",
+    "spec-2": "⚙️ Report automation with Python",
+    "spec-3": "🗄️ Database design and analysis with SQL",
+    "spec-4": "📈 Interactive dashboards with Power BI",
+    "spec-5": "🔗 Merging and unifying multiple data sources",
+    "proj-tag": "// Projects",
+    "proj-heading": "Real Projects, Measurable Results",
+    "p1-before": "209 employees across 3 departments\nMissing records and scattered timestamps\nImpossible to process manually",
+    "p1-after": "3,492 detailed daily report rows\nAutomatically categorized and formatted\nReady for instant review",
+    "p1-tag-before": "Before", "p1-tag-after": "After",
+    "p1-title": "Attendance Report Automation — Python + Excel",
+    "p1-desc": "Raw attendance data for 209 employees across 3 departments — missing records, incomplete timestamps, and inconsistent statuses that make manual analysis nearly impossible. I built a Python script that handles all of this automatically: it detects every gap, fills it intelligently using the employee's historical records or their official shift time, then outputs a fully formatted, categorized Excel report ready for delivery — replacing hours of repetitive manual auditing.",
+    "p1-hl1": "Automatic daily classification — present / absent / leave / break — with precise hour calculations for each status",
+    "p1-hl2": "A smart fallback algorithm that searches for the employee's nearest prior record, defaulting to their official shift time when none exists",
+    "p1-hl3": "Calculates late arrivals and early departures automatically, excluding minor discrepancies under 16 minutes",
+    "p1-hl4": "Fully formatted Excel output: color-coded statuses, frozen rows, full RTL layout, ready to print and share",
+    "p1-result": "209 employees × complete daily data = 3,492 precise, detailed report rows — generated in seconds instead of hours",
+    "p1-btn1": "⬇ Python Code", "p1-btn2": "⬇ Results Excel File",
+    "p2-before": "11 Excel files from 7 project managers\nImpossible to compare or combine\nWithout significant manual effort",
+    "p2-after": "One unified report + Power BI dashboard\nShowing contracts, nationalities, and roles\nFor management in a single click",
+    "p2-tag-before": "Before", "p2-tag-after": "After",
+    "p2-title": "Project Managers Data Consolidation — Python + Power BI",
+    "p2-desc": "11 scattered Excel files from 7 project managers, each in its own format, nearly impossible to consolidate manually. I built a Python script that merges these files, cleans the data, and splits the output into specialized sheets — plus an interactive Power BI dashboard for management.",
+    "p2-hl1": "Merged 11 files from 7 different sources into one clean, unified dataset",
+    "p2-hl2": "Automatic split into sheets: nationalities, projects, roles, extensions, expired contracts",
+    "p2-hl3": "Flags expired and soon-to-expire contracts, sorting them into dedicated sheets",
+    "p2-hl4": "Power BI dashboard: workforce distribution, resignation rate, expired and expiring contracts",
+    "p2-result": "A unified view of the entire workforce across all projects — ready for management in seconds",
+    "p2-btn1": "⬇ Power BI Dashboard", "p2-btn2": "⬇ Unified Excel File", "p2-btn3": "⬇ Results Excel File",
+    "p3-before": "Scattered monthly claim files\nWith different purchase orders\nNo connection between them",
+    "p3-after": "A complete SQL database\n+ Power BI dashboard\nFor instant review and auditing",
+    "p3-tag-before": "Before", "p3-tag-after": "After",
+    "p3-title": "Payroll Claims Database — SQL + Power BI",
+    "p3-desc": "Payroll claims scattered across multiple months and purchase orders with no database to connect them. I designed a relational database from scratch using SQL and PostgreSQL, with advanced analytical queries and a Power BI dashboard showing total costs linked to official delivery documents.",
+    "p3-hl1": "Built a relational database covering more than 10 consecutive claim cycles",
+    "p3-hl2": "Window functions to calculate each employee's share of total cost and their monthly ranking",
+    "p3-hl3": "A subquery to identify employees whose cost exceeds the overall average",
+    "p3-hl4": "Power BI dashboard: total costs, breakdown by job title, month-over-month comparison",
+    "p3-result": "Instant financial auditing for every claim cycle, replacing file-by-file manual review",
+    "p3-btn3": "⬇ Power BI Dashboard",
+    "p4-before": "15 monthly claim files\nSpanning 14 months\nImpossible to compare together",
+    "p4-after": "One unified Excel file + dashboard\nShowing all 14 months in one view\nWith instant export capability",
+    "p4-tag-before": "Before", "p4-tag-after": "After",
+    "p4-title": "Financial Data Consolidation & Analysis — Excel + Power BI",
+    "p4-desc": "15 scattered monthly claim files spanning 14 consecutive months across multiple operational outlets, with no way to compare them. I consolidated all the files into a structured Excel model that gives management a complete financial view, filterable by month, outlet, and employee.",
+    "p4-hl1": "Merged 15 monthly files into 3 sheets: unified data, monthly summary, reference documents",
+    "p4-hl2": "Processed over 7,000 rows of financial data, standardizing formats and labels across all files",
+    "p4-hl3": "Power BI dashboard: total costs, employee distribution, analysis across 10 operational outlets",
+    "p4-hl4": "Instantly exportable reports, ready to present to management",
+    "p4-result": "A complete 14-month financial view in a single dashboard — replacing 15 files that couldn't be compared",
+    "p4-btn1": "⬇ Download Unified Excel File", "p4-btn2": "⬇ Download Power BI Dashboard",
+    "result-label-1": "Result:", "result-label-2": "Result:", "result-label-3": "Result:", "result-label-4": "Result:",
+    "contact-p": "I'm looking for opportunities that believe great decisions start with accurate, reliable data.",
+    "footer-copy": "© 2026 Reyoof Sahban"
+  }
+};
 
+function applyLang(lang){
+  const dict = translations[lang];
+  Object.keys(dict).forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.innerHTML = dict[id];
+  });
+  document.title = dict["page-title"];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('langToggle').textContent = lang === 'ar' ? 'EN' : 'AR';
+  localStorage.setItem('preferredLang', lang);
+}
 
-</body></html>
+let currentLang = localStorage.getItem('preferredLang') || 'ar';
+applyLang(currentLang);
+
+document.getElementById('langToggle').addEventListener('click', () => {
+  currentLang = currentLang === 'ar' ? 'en' : 'ar';
+  applyLang(currentLang);
+});
+</script>
+
+</body>
+</html>
